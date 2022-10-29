@@ -6,6 +6,10 @@
 package main;
 
 import control.Control;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import servicios.Conexion;
 import vista.vista;
 
 /**
@@ -19,8 +23,12 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        vista vista=new vista();
-        Control control=new Control(vista);
+        vista vista = new vista();
+        try {
+            Control control = new Control(vista, Conexion.getConexion());
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-    
+
 }
